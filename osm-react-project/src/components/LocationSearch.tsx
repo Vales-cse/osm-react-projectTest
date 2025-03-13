@@ -1,6 +1,7 @@
 import type { Place } from "../api/Place";
 import React, { useState } from "react";
 import { search } from "../api/search";
+import ModalAlert from "./ModalAlert";
 
 interface LocationSearchProps {
   onPlaceClick: (place: Place) => void;
@@ -9,12 +10,24 @@ interface LocationSearchProps {
 export default function LocationSearch({ onPlaceClick }: LocationSearchProps) {
   const [places, setPlaces] = useState<Place[]>([]);
   const [term, setTerm] = useState("");
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  //Attivare se si eccede il limite di 10 entry
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if(places.length >= 10) {
+      toggleModal();
+      return;
+    }
+
     const results = await search(term);
     setPlaces([...places, ...results]); //Non sovrascrivo i valori precedenti
+    setTerm("");
   };
 
   const handleDelete = (id: number, event: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,7 +39,7 @@ export default function LocationSearch({ onPlaceClick }: LocationSearchProps) {
   const itemSearched = () => {
     return (
       <>
-        <h1 className="fs-5">Results:</h1>
+        <h1 className="fs-5">Results history:</h1>
         <ul className="list-group">
           {places.map((place) => (
             <li
@@ -53,9 +66,11 @@ export default function LocationSearch({ onPlaceClick }: LocationSearchProps) {
           id="location"
           value={term}
           onChange={(e) => setTerm(e.target.value)}
+          disabled={showModal}
         />
       </form>
       {itemSearched()}
+      <ModalAlert open={showModal} onClose={toggleModal} title={"Too many results!"} text={"You have reached the limit of 10 places."}/>
     </div>
   );
 }

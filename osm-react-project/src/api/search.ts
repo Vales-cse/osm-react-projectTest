@@ -17,7 +17,7 @@ export const search = async (term: string) => {
     //aggiungo una gestione dell'errore
     try {
         const res = await fetch(
-            `https://nominatim.openstreetmap.org/search?q=${term}&format=geojson&addressdetail=1&layer=address&limit=2`
+            `https://nominatim.openstreetmap.org/search?q=${term}&format=geojson&addressdetail=1&layer=address&limit=1`
         );
         console.log('Response:', res);  // Stampa la risposta
         if (!res.ok) {
