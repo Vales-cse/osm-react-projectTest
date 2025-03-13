@@ -2,3 +2,18 @@
   background-color: #e3f2fd; /* Colore di background che corrisponde a bg-info-subtle */
   min-height: 100vh; /* Assicura che la mappa copra tutta l'altezza della pagina */
 }
+
+/* Stile per il Modal background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);  /* Semi-trasparente per oscurare la pagina */
+  z-index: 1040;  /* Assicurati che l'overlay sia sopra il contenuto */
+}
+
+.modal {
+  z-index: 1050;  /* Il modal deve stare sopra l'overlay */
+}

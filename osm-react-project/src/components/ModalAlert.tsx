@@ -8,6 +8,7 @@ interface ModalAlertProps {
 export default function ModalAlert(props: ModalAlertProps) {
   return (
     <>
+        {props.open && <div className="modal-overlay"/>}
         <div className={`modal ${props.open ? 'show' : ''}`} tabIndex={-1} style={{ display: props.open ? 'block' : 'none' }}>
         <div className="modal-dialog">
             <div className="modal-content">
