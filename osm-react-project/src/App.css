@@ -1,8 +1,4 @@
-/*.App {
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  .alert {
-    font-size: 1.2rem;
-  }*/
+.App {
+  background-color: #e3f2fd; /* Colore di background che corrisponde a bg-info-subtle */
+  min-height: 100vh; /* Assicura che la mappa copra tutta l'altezza della pagina */
+}

@@ -14,7 +14,7 @@ export default function LocationSearch({ onPlaceClick }: LocationSearchProps) {
     event.preventDefault();
 
     const results = await search(term);
-    setPlaces([...places, ...results]);
+    setPlaces([...places, ...results]); //Non sovrascrivo i valori precedenti
   };
 
   const handleDelete = (id: number, event: React.MouseEvent<HTMLButtonElement>) => {
@@ -35,7 +35,7 @@ export default function LocationSearch({ onPlaceClick }: LocationSearchProps) {
               onClick={() => onPlaceClick(place)}
             >
               {place.name}
-              <button className="btn btn-danger" onClick={(event) => handleDelete(place.id, event)}>X</button>
+              <button className="btn btn-outline-danger" onClick={(event) => handleDelete(place.id, event)}>X</button>
             </li>
           ))}
         </ul>
@@ -55,7 +55,6 @@ export default function LocationSearch({ onPlaceClick }: LocationSearchProps) {
           onChange={(e) => setTerm(e.target.value)}
         />
       </form>
-      <h1 className="text-uppercase fs-5">Found Location:</h1>
       {itemSearched()}
     </div>
   );
